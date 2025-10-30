@@ -1,2 +1,23 @@
-# Aelion-Bruz
-ㅤ✱ NEW-YORK : 2009 🚏🪪 This big city is very dense, its population is so large that it makes this city very crowded. I visited here for a vacation, where there are many very beautiful places in this city. 
+#  function Vehicle(type) {
+  this.type = type;
+}
+
+Vehicle.prototype.describe = function() {
+  return `This is a ${this.type}`;
+};
+
+function Car(brand) {
+  Vehicle.call(this, 'car');
+  this.brand = brand;
+}
+
+Car.prototype = Object.create(Vehicle.prototype);
+Car.prototype.constructor = Car;
+
+Car.prototype.describe = function() {
+  return Vehicle.prototype.describe.call(this) + ` made by ${this.brand}`;
+};
+
+const tesla = new Car('Tesla');
+console.log(tesla.describe());
+console.log(tesla.constructor.name);
